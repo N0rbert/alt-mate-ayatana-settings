@@ -1,0 +1,44 @@
+[Toplevel top]
+orientation=top
+expand=true
+size=28
+
+[Object briskmenu]
+locked=true
+position=0
+panel-right-stick=false
+toplevel-id=top
+applet-iid=BriskMenuFactory::BriskMenu
+object-type=applet
+
+[Object windowpicker]
+locked=true
+position=10
+panel-right-stick=false
+toplevel-id=top
+applet-iid=MateWindowPickerFactory::MateWindowPicker
+object-type=applet
+
+[Object windowbuttonsapplet]
+locked=true
+position=20
+panel-right-stick=true
+toplevel-id=top
+applet-iid=WindowButtonsAppletFactory::WindowButtonsApplet
+object-type=applet
+
+[Object notificationarea]
+locked=true
+position=10
+panel-right-stick=true
+toplevel-id=top
+applet-iid=NotificationAreaAppletFactory::NotificationArea
+object-type=applet
+
+[Object indicatorappletcomplete]
+locked=true
+position=0
+panel-right-stick=true
+toplevel-id=top
+applet-iid=IndicatorAppletCompleteFactory::IndicatorAppletComplete
+object-type=applet

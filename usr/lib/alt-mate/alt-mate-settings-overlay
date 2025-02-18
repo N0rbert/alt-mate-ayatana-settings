@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+function autostart_clean() {
+    FILENAME="${1}"
+    if [ -e "/usr/share/mate/autostart/${FILENAME}" ] && [ -e "${HOME}/.config/autostart/${FILENAME}" ]; then
+        rm -f "${HOME}/.config/autostart/${FILENAME}"
+    fi
+}
+
+function overlay_file() {
+    local SYSTEM_FILE="/usr/share/alt-mate/settings-overlay/${1}"
+    local USER_FILE="${HOME}/.${1}"
+    local USER_DIR=$(dirname "${USER_FILE}")
+
+    # If the file doesn't exist or is zero-bytes then overlay the
+    # configuration.
+    if [ ! -f "${USER_FILE}" ] || [ ! -s "${USER_FILE}" ]; then
+        mkdir -p "${USER_DIR}"
+        cp "${SYSTEM_FILE}" "${USER_FILE}"
+    fi
+}
+
+if [ ! -d "${HOME}/.config/plank/dock1" ]; then
+    overlay_file config/plank/dock1/launchers/desktop.dockitem
+    overlay_file config/plank/dock1/launchers/firefox.dockitem
+    overlay_file config/plank/dock1/launchers/caja-browser.dockitem
+    overlay_file config/plank/dock1/launchers/matecc.dockitem
+    overlay_file config/plank/dock1/launchers/mate-system-monitor.dockitem
+    overlay_file config/plank/dock1/launchers/mate-terminal.dockitem
+    overlay_file config/plank/dock1/launchers/mate-calc.dockitem
+    overlay_file config/plank/dock1/launchers/clock.dockitem
+    overlay_file config/plank/dock1/launchers/trash.dockitem
+fi
+
+overlay_file config/tilda/config_0
+
+# Now that the HUD is enabled by default at the system
+# level, any duplicate local autostart files can be removed.
+autostart_clean mate-hud.desktop
+
+# set ubuntu-mate (Traditional) MATE Panel for the first time
+if [ ! -e "${HOME}/.config/mate-panel-layout-set" ] && [ "$(gsettings get org.mate.panel default-layout)" == "'ubuntu-mate'" ] ; then
+    mate-tweak --layout ubuntu-mate && touch "${HOME}/.config/mate-panel-layout-set"
+fi

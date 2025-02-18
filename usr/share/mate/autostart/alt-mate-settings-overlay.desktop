@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name[en_GB]=Settings Overlay
+Name=Settings Overlay
+Comment[en_GB]=ALT MATE Settings Overlay
+Comment=ALT MATE Settings Overlay
+Exec=/usr/lib/alt-mate/alt-mate-settings-overlay
+Terminal=false
+Type=Application
+StartupNotify=false
+Categories=
+X-MATE-Autostart-enabled=true
+X-MATE-Autostart-Phase=Initialization
+NoDisplay=true
